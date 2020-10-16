@@ -30,8 +30,10 @@ GIT:
     echo " " > .gitignore
     echo "# WorldOfGames" >> README.md
     git init
-    git commit -m "first commit"
+    git commit -am "first commit"
     git add .
+    git add *
+    git add .gitignore
     git branch -M main
     git remote add origin https://github.com/ofirshi/WorldOfGames.git
     git push -u origin main
