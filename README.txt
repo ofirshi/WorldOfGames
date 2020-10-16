@@ -1,4 +1,3 @@
-
 Python:
 pip freeze > requirements.txt
 
@@ -23,4 +22,21 @@ docker run -d -it --name worldoffames ofirsh11/worldoffames
 docker-compose up -d
 
 Windows:
-Get-Content Dockerfile | docker build -
+    Get-Content Dockerfile | docker build -
+
+
+------------
+GIT:
+    echo " " > .gitignore
+    echo "# WorldOfGames" >> README.md
+    git init
+    git commit -m "first commit"
+    git add .
+    git branch -M main
+    git remote add origin https://github.com/ofirshi/WorldOfGames.git
+    git push -u origin main
+
+
+    git remote add origin https://github.com/ofirshi/WorldOfGames.git
+    git branch -M main
+    git push -u origin main
