@@ -1,6 +1,39 @@
 properties([[$class: 'JiraProjectProperty'], pipelineTriggers([cron('H/2 * * * *'), pollSCM(ignorePostCommitHooks: true, scmpoll_spec: 'H/2 * * * *')])])
-node{
- stage("1")
- git credentialsId: 'c8238df7-eca5-48ea-a075-eb5aa5ec78dc', url: 'https://github.com/ofirshi/WorldOfGames.git'
- sh "ls"
-}
+pipeline {
+    agent {
+        label any
+    }
+
+    environment {
+            URL_ADDR = '127.0.0.1'
+            PORT_NUMBER = '8777'
+    }
+
+    stages {
+        stage('clone') {
+            steps {
+                checkout scm
+            }
+        }
+		 stage('build') {
+            steps {
+						 sh 'python3 -m pip install --upgrade pip --force --user --no-warn-script-location --no-cache-dir'
+						 sh 'pip install --no-cache-dir -r ./requirements.txt --user --no-warn-script-location --use-feature=2020-resolver'
+					} 
+            }
+		stage('test') {
+            steps {
+					script {
+					try {
+						sh 'python3 tests/e2e.py ${URL_ADDR} ${PORT_NUMBER}'
+					}
+				    catch(err) {
+							println(err.getMessage());
+							throw err
+							}
+						}
+						}
+
+    }
+	}
+	}
