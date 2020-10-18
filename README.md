@@ -1,3 +1,5 @@
+# WorldOfGames
+
 Python:
 pip freeze > requirements.txt
 
@@ -27,18 +29,18 @@ Windows:
 
 ------------
 GIT:
-    echo " " > .gitignore
-    echo "# WorldOfGames" >> README.md
-    git init
-    git add .
-    git add *
-    git add .gitignore
-    git commit -am "first commit"
-    git branch -M main
-    git remote add origin https://github.com/ofirshi/WorldOfGames.git
-    git push -u origin main
+    #echo " " > .gitignore
+    #echo "# WorldOfGames" >> README.md
+    #git init
+    #git add .
+    #git add *
+    #git add .gitignore
+    #git commit -am "first commit"
+    #git branch -M main
+    #git remote add origin https://github.com/ofirshi/WorldOfGames.git
+    #git push -u origin main
 
 
-    git remote add origin https://github.com/ofirshi/WorldOfGames.git
-    git branch -M main
-    git push -u origin main
+    #git remote add origin https://github.com/ofirshi/WorldOfGames.git
+    #git branch -M main
+    #git push -u origin main
