@@ -1,22 +1,13 @@
-import sys
-
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-
-try:
-    param_1 = sys.argv[1]
-    param_2 = sys.argv[2]
-except IndexError:
-    param_1 = "192.168.95.5"
-    param_2 = "8777"
-driver = webdriver.Chrome(ChromeDriverManager().install())
-
-'''it’s purpose is to test our web service. It will get the application
+"""it’s purpose is to test our web service. It will get the application
 URL as an input, open a browser to that URL, select the score element in our web page,
-check that it is a number between 1 to 1000 and return a boolean value if it’s true or not.'''
+check that it is a number between 1 to 1000 and return a boolean value if it’s true or not."""
 
 
 def test_scores_service(url, port) -> int:
+    from selenium import webdriver
+    from webdriver_manager.chrome import ChromeDriverManager
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
     try:
         driver.get("http://" + url + ":" + port)
         driver.implicitly_wait(5)  # wait up to
@@ -36,6 +27,7 @@ code if the tests failed and 0 if they passed.'''
 
 
 def main_function(url, port):
+    import sys
     if 0 == int(test_scores_service(url, port)):
         sys.exit(0)
     else:
@@ -43,6 +35,25 @@ def main_function(url, port):
 
 
 if __name__ == "__main__":
-    param_1 = "192.168.95.5"
-    param_2 = "8777"
-    main_function(param_1, param_2)
+    from sys import argv
+
+    try:
+        print(len(argv))
+        if len(argv) == 3:
+            param_1 = argv[1:]
+            param_2 = argv[2:]
+            main_function(param_1, param_2)
+        elif len(argv) == 2:
+            param_1 = argv[1:]
+            param_2 = "8777"
+            main_function(param_1, param_2)
+        elif len(argv) == 1:
+            param_1 = "127.0.0.1"
+            param_2 = "8777"
+            main_function(param_1, param_2)
+        # main_function(param_1, param_2)
+        else:
+            print('Please provide IP and Port number...')
+    except IndexError:
+        param_1 = "192.168.95.5"
+        param_2 = "8777"
