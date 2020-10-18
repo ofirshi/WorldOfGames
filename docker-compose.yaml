@@ -1,10 +1,9 @@
-version: '3'
-
+version: "3"
 services:
-  python:
+  webserver:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/ofirsh11/worldoffames'
     ports:
       - 8777:8777
     volumes:
-      - .:/tmp
+      - .:/app
