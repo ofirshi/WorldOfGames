@@ -1,9 +1,7 @@
-node {
-pipeline {
-    agent {
-        label any
-    }
+#!/usr/bin/env groovy
 
+pipeline {
+    agent { label any  }
     environment {
             URL_ADDR = '127.0.0.1'
             PORT_NUMBER = '8777'
@@ -30,4 +28,3 @@ pipeline {
 	}
 
     }
-}
