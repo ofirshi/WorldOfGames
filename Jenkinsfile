@@ -10,7 +10,8 @@ pipeline {
     stages {
         stage('clone') {
             steps {
-                git url: 'https://github.com/ofirshi/WorldOfGames.git'
+                //git url: 'https://github.com/ofirshi/WorldOfGames.git'
+                checkout scm
             }
         }
 		 stage('build') {
