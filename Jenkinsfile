@@ -23,17 +23,11 @@ pipeline {
             }
 		stage('test') {
             steps {
-					script {
-					try {
+
 						sh 'python3 tests/e2e.py ${URL_ADDR} ${PORT_NUMBER}'
 					}
-				    catch(err) {
-							println(err.getMessage());
-							throw err
-							}
 						}
 						}
 
     }
-	}
 	}
