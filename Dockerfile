@@ -9,8 +9,9 @@ RUN apt-get -y remove \
     #apt-get -y update  \
     #&& apt-get install -y --no-install-recommends gcc \
     && rm -rf /var/lib/apt/lists/*
-RUN python3 -m pip install --upgrade pip --force --user --no-warn-script-location
+RUN python3 -m pip install --upgrade pip --force --user --no-warn-script-location --no-cache-dir
 RUN pip install --no-cache-dir -r /app/requirements.txt --user --no-warn-script-location --use-feature=2020-resolver
 EXPOSE 8777/tcp
 VOLUME /app/
 CMD [ "python3", "MainScores.py" ]
+#ENTRYPOINT ["/app/MainScores.py"]
