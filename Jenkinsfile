@@ -1,12 +1,8 @@
-#!/usr/bin/env groovy
-
-pipeline {
-    agent { label any  }
     environment {
             URL_ADDR = '127.0.0.1'
             PORT_NUMBER = '8777'
     }
-
+node{
     stages {
         stage('clone') {
             steps {
@@ -29,3 +25,4 @@ pipeline {
 	}
 
     }
+}
