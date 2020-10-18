@@ -17,9 +17,9 @@ docker save worldoffames > worldoffames.tar
 docker load --input worldoffames.tar
 
 #run
-docker run -d -it -p 8777:8777 -v /dev:/tmp --name worldoffames ofirsh11/worldoffames
+docker volume create app
+docker run -d -it -p 8777:8777 -v "$(pwd)":/app --name worldoffames ofirsh11/worldoffames
 
-docker run -d -it --name worldoffames ofirsh11/worldoffames
 
 docker-compose up -d
 
