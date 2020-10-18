@@ -1,4 +1,3 @@
-properties([[$class: 'JiraProjectProperty'], pipelineTriggers([cron('H/2 * * * *'), pollSCM(ignorePostCommitHooks: true, scmpoll_spec: 'H/2 * * * *')])])
 pipeline {
     agent {
         label any
@@ -27,7 +26,6 @@ pipeline {
 						sh 'python3 tests/e2e.py ${URL_ADDR} ${PORT_NUMBER}'
 					}
 						}
-						}
+	}
 
     }
-	}
