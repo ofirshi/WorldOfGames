@@ -22,6 +22,7 @@ pipeline {
         stage('Run') {
             steps {
                 bat 'docker-compose up -d'
+                waitUntilServicesReady
             }
         }
         stage('Test') {
