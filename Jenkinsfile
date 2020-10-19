@@ -41,8 +41,8 @@ pipeline {
 
             }
         }
-	}
-            stage('cleanup') {
+        }
+    stage('cleanup') {
             steps {
             withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
@@ -57,4 +57,5 @@ pipeline {
         }
         }
 	}
+   }
 }
