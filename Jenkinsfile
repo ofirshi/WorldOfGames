@@ -1,4 +1,9 @@
 pipeline {
+    environment {
+        url_ip = "127.0.0.1"
+        port_id = "8777"
+    }
+
   agent any
    stages {
         stage('Checkout') {
@@ -23,7 +28,7 @@ pipeline {
             steps {
                 script {
             try {
-                bat "python3 tests\e2e.py"
+                bat "python3 tests\e2e.py ${env.url_ip} ${env.port_id}"
             } catch (err) {
                             currentBuild.result='FAILURE'
                         }
