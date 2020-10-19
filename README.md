@@ -2,8 +2,8 @@
 
 
 Client : 
-pip install -r requirements.txt --user
-python3 MainGame.py
+    pip install -r requirements.txt --user
+    python3 MainGame.py
 
 Server:
     Python:
@@ -16,6 +16,6 @@ Server:
         OR:
         docker-compose up -d
 
-Test:
-python3 tests/e2e.py <server ip> <port>
-    Default port 8777
+    Test:
+        python3 tests/e2e.py <server ip> <port>
+            Default port 8777
