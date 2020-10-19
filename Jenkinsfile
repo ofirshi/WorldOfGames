@@ -21,13 +21,13 @@ pipeline {
             steps {
                 bat 'docker-compose pull'
                 bat 'docker-compose build'
-                waitUntilServicesReady
+                //waitUntilServicesReady
             }
         }
         stage('Run') {
             steps {
                 bat 'docker-compose up -d'
-                waitUntilServicesReady
+                //waitUntilServicesReady
             }
         }
         stage('Test') {
