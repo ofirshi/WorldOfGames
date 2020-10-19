@@ -1,2 +1,2 @@
 docker login --username=<>
-docker run -d -it -p 8777:8777 -v "$(pwd)":/app --name flask_server ofirsh11/worldoffames
+docker run --name flask_server -d -it -p 8777:8777 -v "$(pwd)":/app  ofirsh11/worldoffames
