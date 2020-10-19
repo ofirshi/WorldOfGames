@@ -4,7 +4,11 @@ pipeline {
         port_id = "8777"
     }
 
-  agent any
+  agent {
+        node {
+            label 'windows'
+        }
+    }
    stages {
         stage('Checkout') {
             steps {
