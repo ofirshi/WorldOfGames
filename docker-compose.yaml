@@ -3,7 +3,20 @@ services:
   webserver:
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/ofirsh11/worldoffames'
+    container_name: flask_server
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     ports:
       - 8777:8777
     volumes:
       - .:/app
+networks:
+  default:
+    driver: overlay
+    

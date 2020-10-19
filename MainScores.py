@@ -8,7 +8,6 @@ scores_file: str = "Scores.txt"
 
 def create_index_file(file_name: str) -> None:
     """
-
     :param file_name:
     :return:
     :rtype: object
@@ -54,7 +53,6 @@ def create_index_file(file_name: str) -> None:
 
 def score_server(html_file: str) -> None:
     """
-
     :param html_file:
     :return:
     :rtype: object

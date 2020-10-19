@@ -1,17 +1,50 @@
 pipeline {
-   agent any
+  environment {
+  //https://medium.com/@gustavo.guss/jenkins-building-docker-image-and-sending-to-registry-64b84ea45ee9
+    registry = "ofirsh11/worldoffames"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+  }
 
+   agent any
    stages {
-        stage('clone') {
+        stage('Checkout') {
             steps {
-                sh 'curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py'
-                sh 'python3 get-pip.py'
-                sh 'rm -rf get-pip.py'
-                sh 'python3 -m pip install --upgrade pip --force  --no-warn-script-location'
-                sh '${JENKINS_HOME}/.local/bin/pip install --no-cache-dir -r ./requirements.txt --no-warn-script-location'
-                sh 'python3 ./tests/e2e.py '
+               git 'https://github.com/ofirshi/WorldOfGames'
+               sh 'docker system prune -af'
             }
         }
-	
+        stage('Build') {
+            steps {
+                sh 'docker-compose pull'
+                sh 'docker-compose build'
+            }
+        }
+        stage('Run') {
+            steps {
+                sh 'docker-compose up -d'
+            }
+        }
+        stage('Test') {
+            steps {
+                script {
+            try {
+                sh "python3 tests/e2e.py"
+            } catch (err) {
+                            currentBuild.result='FAILURE'
+                        }
+
+            }
+        }
+	}
+            stage('Test') {
+            steps {
+               sh 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
+               sh 'docker push ofirsh11/worldoffames'
+               sh 'docker stop $(docker ps -aq)'
+               sh 'docker rm $(docker ps -aq)'
+               sh 'docker rmi $(docker images -q)'
+               sh 'docker system prune -af'
+        }
 	}
 }
