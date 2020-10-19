@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
             try {
-                bat "python3 tests\e2e.py ${env.url_ip} ${env.port_id}"
+                bat "python3 tests\\e2e.py ${env.url_ip} ${env.port_id}"
             } catch (err) {
                             currentBuild.result='FAILURE'
                         }
