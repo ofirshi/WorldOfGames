@@ -3,7 +3,8 @@ pipeline {
    stages {
         stage('Checkout') {
             steps {
-               git 'https://github.com/ofirshi/WorldOfGames'
+             git credentialsId: 'c8238df7-eca5-48ea-a075-eb5aa5ec78dc', url: 'https://github.com/ofirshi/WorldOfGames.git'
+             //git 'https://github.com/ofirshi/WorldOfGames'
                bat 'docker system prune -af'
             }
         }
@@ -32,6 +33,8 @@ pipeline {
 	}
             stage('Test') {
             steps {
+            withCredentials([usernamePassword( credentialsId: 'docker-hub-credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+               bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
                //sh 'docker stop $(docker ps -aq)'
@@ -40,6 +43,7 @@ pipeline {
                //sh 'docker rmi $(docker images -q)'
                bat 'docker-clear.bat'
                bat 'docker system prune -af'
+        }
         }
 	}
 }
