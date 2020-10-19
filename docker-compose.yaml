@@ -1,6 +1,7 @@
 version: "3"
 services:
   webserver:
+    build : .
     tty: true # Enables debugging capabilities when attached to this container.
     image: 'docker.io/ofirsh11/worldoffames'
     container_name: flask_server
