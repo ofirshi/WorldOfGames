@@ -38,7 +38,8 @@ pipeline {
 	}
             stage('Test') {
             steps {
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {               bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
+            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+               bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
                //sh 'docker stop $(docker ps -aq)'
