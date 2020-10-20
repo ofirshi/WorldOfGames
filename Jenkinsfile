@@ -36,7 +36,6 @@ pipeline {
             bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
            }
         }
-        }
     stage('cleanup') {
             steps {
             withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
