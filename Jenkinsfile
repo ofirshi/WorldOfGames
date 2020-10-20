@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                bat 'docker run --name flask_server -d -it -p 8777:8777 --mount type=bind,source=$(pwd)/Scores.txt,target=/app/Scores.txt  ofirsh11/worldoffames'
+                bat 'docker run --name flask_server -d -it -p 8777:8777 --mount type=bind,source=${WORKSPACE}/Scores.txt,target=/app/Scores.txt  ofirsh11/worldoffames'
             }
         }
         stage('Test') {
