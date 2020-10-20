@@ -12,28 +12,25 @@ pipeline {
    stages {
         stage('Checkout') {
             steps {
-             git credentialsId: 'c8238df7-eca5-48ea-a075-eb5aa5ec78dc', url: 'https://github.com/ofirshi/WorldOfGames.git'
-             //git 'https://github.com/ofirshi/WorldOfGames'
-               bat 'docker system prune -af'
+             checkout scm
+              bat 'docker system prune -af'
             }
         }
         stage('Build') {
             steps {
-                bat 'docker-compose pull'
-                bat 'docker-compose build'
-                //waitUntilServicesReady
+                bat 'docker build . -f Dockerfile --pull --force-rm -t ofirsh11/worldoffames'
             }
         }
         stage('Run') {
             steps {
-                bat 'docker-compose up -d'
-                //waitUntilServicesReady
+                bat 'docker run --name flask_server -d -it -p 8777:8777 --mount type=bind,source=$(pwd)/Scores.txt,target=/app/Scores.txt  ofirsh11/worldoffames'
             }
         }
         stage('Test') {
             steps {
                 script {
             try {
+                bat 'echo 8  > tests\\Scores.txt'
                 bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
             } catch (err) {
                             currentBuild.result='FAILURE'
@@ -44,14 +41,10 @@ pipeline {
         }
     stage('cleanup') {
             steps {
-            withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+            withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
-               //sh 'docker stop $(docker ps -aq)'
-               //bat 'FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i'
-               //sh 'docker rm $(docker ps -aq)'
-               //sh 'docker rmi $(docker images -q)'
                bat 'docker-clear.bat'
                bat 'docker system prune -af'
         }
