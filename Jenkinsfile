@@ -51,6 +51,7 @@ pipeline {
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
                //bat 'docker-clear.bat'
+               bat 'docker system prune -af'
         }
         }
 	}
