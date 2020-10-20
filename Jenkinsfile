@@ -33,14 +33,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                script {
-            try {
             bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
-            } catch (err) {
-                            currentBuild.result='FAILURE'
-                        }
-
-            }
+           }
         }
         }
     stage('cleanup') {
@@ -50,8 +44,10 @@ pipeline {
                bat 'docker login -u %USER% -p %PASS%'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
+               bat 'docker rmi -f python:3'
+               bat 'docker rmi -f ofirsh11/worldoffames:latest'
                //bat 'docker-clear.bat'
-               bat 'docker system prune -af'
+               //bat 'docker system prune -af'
         }
         }
 	}
