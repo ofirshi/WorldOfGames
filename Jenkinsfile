@@ -57,9 +57,10 @@ pipeline {
         }
 	}
     post {
-    always {
-      bat 'docker system prune -af'
-       bat 'docker kill flask_server'
+        always {
+        bat 'docker system prune -af'
+        bat 'docker kill flask_server'
+        }
     }
     failure {
       slackSend(
