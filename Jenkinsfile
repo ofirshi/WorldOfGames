@@ -46,6 +46,7 @@ pipeline {
                bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
+               bat 'docker kill flask_server'
                bat 'docker-clear.bat'
                bat 'docker system prune -af'
         }
