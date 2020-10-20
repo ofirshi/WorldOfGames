@@ -38,6 +38,7 @@ pipeline {
             bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
             } catch (err) {
                             currentBuild.result='FAILURE'
+                            throw error
                         }
 
             }
