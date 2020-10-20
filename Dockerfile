@@ -23,4 +23,5 @@ RUN pip install --no-cache-dir -r /app/requirements.txt --no-warn-script-locatio
 EXPOSE 8777/tcp
 VOLUME /app/
 CMD [ "python3", "MainScores.py" ]
-#ENTRYPOINT ["/app/MainScores.py"]
+#ENTRYPOINT ["python"]
+#CMD [ "MainScores.py" ]
