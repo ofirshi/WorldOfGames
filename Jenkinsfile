@@ -56,17 +56,5 @@ pipeline {
         }
         }
 	}
-    post {
-        always {
-        bat 'docker system prune -af'
-        bat 'docker kill flask_server'
-        }
-    }
-    failure {
-      slackSend(
-        color: "danger",
-        message: "${env.JOB_NAME} failed: ${env.RUN_DISPLAY_URL}"
-      )
-    }
    }
 }
