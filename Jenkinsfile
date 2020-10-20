@@ -3,7 +3,9 @@ pipeline {
         url_ip = "127.0.0.1"
         port_id = "8777"
     }
-
+      options {
+    buildDiscarder(logRotator(numToKeepStr: '2'))
+  }
   agent {
         node {
             label 'windows'
@@ -54,5 +56,16 @@ pipeline {
         }
         }
 	}
+    post {
+    always {
+      bat 'docker system prune -af'
+       bat 'docker kill flask_server'
+    }
+    failure {
+      slackSend(
+        color: "danger",
+        message: "${env.JOB_NAME} failed: ${env.RUN_DISPLAY_URL}"
+      )
+    }
    }
 }
