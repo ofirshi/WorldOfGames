@@ -43,6 +43,7 @@ pipeline {
     stage('cleanup') {
             steps {
             withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+               bat 'docker stop flask_server'
                bat 'docker login -u ${USERNAME} -p ${PASSWORD}'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
