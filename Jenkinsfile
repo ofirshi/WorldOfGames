@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Run') {
             steps {
-                bat 'echo "8"  > tests/Scores.txt'
+                bat 'echo 8 > tests/Scores.txt'
                 bat 'icacls * /reset /t /c /q '
                 bat 'docker run --name flask_server -d -it -p 8777:8777 --mount type=bind,source=%WORKSPACE%/Scores.txt,target=/app/Scores.txt  ofirsh11/worldoffames'
             }
@@ -47,7 +47,7 @@ pipeline {
             steps {
             withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                bat 'docker stop flask_server'
-               bat 'docker login -u $USER -p $PASS'
+               bat 'docker login -u %USER% -p %PASS%'
                bat 'docker tag ofirsh11/worldoffames ofirsh11/worldoffames:latest'
                bat 'docker push ofirsh11/worldoffames'
                bat 'docker kill flask_server'
