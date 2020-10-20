@@ -12,8 +12,9 @@ pipeline {
    stages {
         stage('Checkout') {
             steps {
-             checkout scm
-              bat 'docker system prune -af'
+            deleteDir()
+            checkout scm
+            bat 'docker system prune -af'
             }
         }
         stage('Build') {
