@@ -24,6 +24,7 @@ pipeline {
         }
         stage('Run') {
             steps {
+                bat 'echo 8  > tests\\Scores.txt'
                 bat 'docker run --name flask_server -d -it -p 8777:8777 --mount type=bind,source=${WORKSPACE}/Scores.txt,target=/app/Scores.txt  ofirsh11/worldoffames'
             }
         }
@@ -31,8 +32,7 @@ pipeline {
             steps {
                 script {
             try {
-                bat 'echo 8  > tests\\Scores.txt'
-                bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
+            bat "python tests\\e2e.py ${env.url_ip} ${env.port_id}"
             } catch (err) {
                             currentBuild.result='FAILURE'
                         }
