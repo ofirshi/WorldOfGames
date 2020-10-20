@@ -4,3 +4,4 @@ venv/
 ofirs.txt
 index.html
 Scores.txt
+.dockerignore

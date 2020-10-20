@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'docker build . -f Dockerfile --pull --force-rm -t ofirsh11/worldoffames'
+                bat 'docker build . -f Dockerfile --no-cache --pull --force-rm -t ofirsh11/worldoffames '
             }
         }
         stage('Run') {
