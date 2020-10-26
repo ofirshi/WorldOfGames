@@ -24,7 +24,7 @@ def test_scores_service(url, port) -> int:
         driver.get("http://" + url + ":" + port)
         driver.implicitly_wait(5)  # wait up to
         actual = driver.find_element_by_id("score").text
-        # print(actual)
+        #print(actual)
         if 1 <= int(actual) <= 1000:
             driver.close()
             return 0

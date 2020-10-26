@@ -1,6 +1,6 @@
 # This file’s sole purpose is to serve the user’s score currently in the scores.txt file over HTTP with HTML.
 # This will be done by using python’s flask library.
-from flask import Flask
+from flask import Flask, render_template
 
 
 scores_file: str = "Scores.txt"
